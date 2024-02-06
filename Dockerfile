@@ -1,12 +1,7 @@
-FROM ubuntu:18.04
-
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
+FROM python:3.9-slim
 COPY . /usr/app/
-EXPOSE 5000
+EXPOSE 8501
 WORKDIR /usr/app/
-RUN apt-get update && \
-    apt-get install -y python3-pip python3-dev && \
-    pip3 install --upgrade pip && \
-    pip3 install --no-cache-dir -r requirements.txt
-CMD python3 flask_api.py
+RUN pip install --upgrade pip setuptools wheel && \
+    pip install --no-cache-dir -r requirements.txt
+CMD ["python", "flask_api.py"]
